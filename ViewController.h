@@ -7,28 +7,30 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
+
+
+//  This is needed for the UIPickerview to work:   <UIPickerViewDelegate, UIPickerViewDataSource>
 @interface ViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource> {
-    __weak IBOutlet UIPickerView *lblAutoDefense;
-    __weak IBOutlet UIPickerView *picAutoDefense;
-    __weak IBOutlet UILabel *lblAutoPicker;
-    __weak IBOutlet UIButton *roundButton;
-    
+   
     
 
-    
-    
+    __weak IBOutlet UIPickerView *lblAutoDefense;
+// pickerview for auton defense
+    __weak IBOutlet UIPickerView *picAutoDefense;
 }
 
 
+/*
 
+ The following are all the connections between the Main.storyboard and this, the ViewController.h
+ 
+ Every action that is needed is also here.
 
-
-
+*/
 // Match Number
     @property (weak, nonatomic) IBOutlet UILabel *LblMatchnum;
     @property (weak, nonatomic) IBOutlet UIStepper *StpMatchnum;
-// Match Change
+//      Match Change
 - (IBAction)didChangeMatchnum:(UIStepper *)sender;
 
 // Team Number
@@ -43,20 +45,21 @@
 - (IBAction)didScouterNumber:(UITextField *)sender;
 
 // Auton
+    // Start Location
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmStartLocation;
 - (IBAction)didStartLocation:(UISegmentedControl *)sender;
 
 
-
+//      Moved to Defense
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmMovedToDefence;
 - (IBAction)didMovetoDefense:(UISegmentedControl *)sender;
 
-
+//      Attempted to Shoot during Auton
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmShotAttempted;
 - (IBAction)didAttemptShot:(UISegmentedControl *)sender;
-//
 
 
+//      Scored high and Low respectively
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmShotHigh;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmShotLow;
 - (IBAction)didAutoScoreHigh:(UISegmentedControl *)sender;
@@ -64,11 +67,11 @@
 
 
 
-//
+//      Crossed a Defense during Auton
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmCrossedDefence;
 - (IBAction)didCrossDefense:(UISegmentedControl *)sender;
 
-// Defences In order
+// Defences In order for Teleop
 // Gate
 @property (weak, nonatomic) IBOutlet UIStepper *stpGate;
 - (IBAction)didChangeGate:(UIStepper *)sender;
@@ -123,57 +126,57 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblLowbar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmLowBar;
 
+
+// See Above
+
 // Teleop
-//      Low Scored
+//      Low Goal Scored During Teleop
     @property (weak, nonatomic) IBOutlet UIStepper *stpLowGoalScore;
     @property (weak, nonatomic) IBOutlet UILabel *lblLowGoalScore;
 - (IBAction)didScoreLow:(UIStepper *)sender;
 
-//      High Scored
-    @property (weak, nonatomic) IBOutlet UIStepper *stpHighGoalScore;
-    @property (weak, nonatomic) IBOutlet UILabel *lblHighGoalScore;
+//      High Goal Scored During Teleop
+     @property (weak, nonatomic) IBOutlet UIStepper *stpHighGoalScore;
+@property (weak, nonatomic) IBOutlet UILabel *
+    lblHighGoalScore;
 - (IBAction)didScoreHigh:(UIStepper *)sender;
 
+
+
 // Other Info
-
-
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmHang;
-
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmStrategy;
 
+// Playing Defense and Defensive Skill
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmDefence;
 - (IBAction)didChangeDefense:(UISegmentedControl *)sender;
-
-
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmDefenceSkill;
 
+
+// Driver Skill
 @property (weak, nonatomic) IBOutlet UISegmentedControl *sgmDriverSkill;
+
+
 // Submit
 @property (weak, nonatomic) IBOutlet UIButton *Submit;
-
 - (IBAction)didSubmit:(UIButton *)sender;
-@property (weak, nonatomic) IBOutlet UIPickerView *pickAutoDefense; // WIP
+
+
+// THe below are used in the UIPickerView and saving what row is selected.
+
+@property (weak, nonatomic) IBOutlet UIPickerView *pickAutoDefense;
 @property (weak, nonatomic) IBOutlet UILabel *lblAutoPickers;
-// PICKER VIEW KLBALVBLASDSD
-@property (weak, nonatomic) IBOutlet UILabel *bolGate;
-@property (weak, nonatomic) IBOutlet UILabel *bolSeesaw;
-@property (weak, nonatomic) IBOutlet UILabel *bolMoat;
-@property (weak, nonatomic) IBOutlet UILabel *bolRamparts;
-@property (weak, nonatomic) IBOutlet UILabel *bolDrawbridge;
-@property (weak, nonatomic) IBOutlet UILabel *bolSallyDoor;
-@property (weak, nonatomic) IBOutlet UILabel *bolRockWall;
-@property (weak, nonatomic) IBOutlet UILabel *bolRoughTerrain;
-@property (weak, nonatomic) IBOutlet UILabel *bolLowBar;
+
+// See above
+
+// The labels listed below are used as varibles, as using varibles normally periviously crashed the app.
 
 
 
 
 
+// The methods used in the ViewController.m
 
-
-
-
--(void) varibles;
 - (void) Save;
 -(void) NextMatch;
 @end

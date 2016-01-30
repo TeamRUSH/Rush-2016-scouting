@@ -12,7 +12,7 @@
 @interface ViewController ()
 
 @end
-
+// The array that is going to be used for the pickerview
 NSArray *_pickerviewarray;
 
 @implementation ViewController
@@ -20,37 +20,44 @@ NSArray *_pickerviewarray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
-    lblAutoPicker.text =@"None";
+ 
+    // Required for the Pickerview to work
+    
     picAutoDefense.delegate = self;
     picAutoDefense.dataSource = self;
     
+    // Defining the Strings for the Array
     _pickerviewarray = @[@"None",@"Gate",@"Seesaw",@"Moat",@"Ramparts",@"Drawbridge",@"Sally Door",@"Rock Wall",@"Rough Terrain",@"Low Bar"];
     
-    CALayer *btnLayer = [roundButton layer];
-    [btnLayer setMasksToBounds:YES];
-    [btnLayer setCornerRadius:5.0f];
 }
 
+
+// PickerView method for what row is selected
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-
+// Sets the label _Auton Picker as the currently selected string the in array
     NSString *defenseSelected = [_pickerviewarray objectAtIndex:row];
     _lblAutoPickers.text = defenseSelected;
     
     
 }
+
+// For the number of rows in the pickerview
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
+
+    // Makes the Number of rows equal to the number of strings in the array
     return _pickerviewarray.count;
-//    NSString *SelectedTile = [self. objectAtIndex:[self.picAutoDefense selectedRowInComponent:0]];
-//    NSLog(@"%@", SelectedTile);
+
 }
 
+// Changes the number of colum; also known as Components
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
+
+// Changes what the name of each row of the pickerview to be equal to the string in that spot of the array.
+// This means that the order of the Array above changes the order of what row is named what.
 -(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return _pickerviewarray[row];
 }
@@ -65,7 +72,7 @@ NSArray *_pickerviewarray;
 
 
 
-// Don't touch what is above
+
 
 
 // Chaning of Match Number Text
@@ -141,6 +148,8 @@ _lblHighGoalScore.text = [NSString stringWithFormat:@"#:%d",val];
     }
 }
 // See above
+
+// You have to play defense to have a skill at defense. This enables / disables defenseive skill.
 - (IBAction)didChangeDefense:(UISegmentedControl *)sender {
 if (_sgmDefence.selectedSegmentIndex == 1 )
 {
@@ -151,8 +160,9 @@ else
     _sgmDefenceSkill.selectedSegmentIndex = -1;
 }
 
+// All of the below are used for changing the label next to their respective stepper, as well as enabling / disabling the segmented control for the speed of the robot at that defense.
 
-// Gate
+    // Gate
 - (IBAction)didChangeGate:(UIStepper *)sender {
   int val = sender.value;
     _lblGate.text = [NSString stringWithFormat:@"#:%d",val];
@@ -169,7 +179,7 @@ if (sender.value != 0)
     }
 }
 
-// Tippy Ramps
+    // Tippy Ramps
 - (IBAction)didChangeTippyRamps:(UIStepper *)sender {
   int val = sender.value;
     _lblTippyRamp.text = [NSString stringWithFormat:@"#:%d",val];
@@ -183,7 +193,7 @@ else {
         [_sgmTippyRamp setEnabled:NO forSegmentAtIndex:2];
     _sgmTippyRamp.selectedSegmentIndex = -1;
 }}
-// Moat
+    // Moat
 - (IBAction)didChangeMoat:(UIStepper *)sender {
   int val = sender.value;
     _lblMoat.text = [NSString stringWithFormat:@"#:%d",val];
@@ -198,7 +208,7 @@ else {
         _sgmMoat.selectedSegmentIndex = -1;
     }
 }
-// Ramparts
+    // Ramparts
 - (IBAction)didChangeRamparts:(UIStepper *)sender {
   int val = sender.value;
     _lblRamparts.text = [NSString stringWithFormat:@"#:%d",val];
@@ -213,7 +223,7 @@ else {
         _sgmRamparts.selectedSegmentIndex = -1;
     }
 }
-// Draw Bridge
+    // Draw Bridge
 - (IBAction)didChangeDrawBridge:(UIStepper *)sender {
   int val = sender.value;
     _lblDrawBridge.text = [NSString stringWithFormat:@"#:%d",val];
@@ -229,7 +239,7 @@ else {
         _sgmDrawBridge.selectedSegmentIndex = -1;
     }
 }
-// Sally Door
+    // Sally Door
 - (IBAction)didChangeSallyDoor:(UIStepper *)sender {
   int val = sender.value;
     _lblSallyDoor.text = [NSString stringWithFormat:@"#:%d",val];
@@ -244,7 +254,7 @@ else {
         _sgmSallyDoor.selectedSegmentIndex = -1;
     }
 }
-// Rock Wall
+    // Rock Wall
 - (IBAction)didChangeRockWall:(UIStepper *)sender {
   int val = sender.value;
     _lblRockWall.text = [NSString stringWithFormat:@"#:%d",val];
@@ -259,7 +269,7 @@ else {
         _sgmRockWall.selectedSegmentIndex = -1;
     }
 }
-// Rough Terrian
+    // Rough Terrian
 - (IBAction)didChangeRoughTerrian:(UIStepper *)sender {
   int val = sender.value;
     _lblRoughTerrian.text = [NSString stringWithFormat:@"#:%d",val];
@@ -275,7 +285,7 @@ else {
         _sgmRoughTerrian.selectedSegmentIndex = -1;
     }
 }
-// Low Bar
+    // Low Bar
 - (IBAction)didChangeLowBar:(UIStepper *)sender {
   int val = sender.value;
    _lblLowbar.text = [NSString stringWithFormat:@"#:%d",val];
@@ -294,103 +304,49 @@ else {
     
     
 }
--(void)varibles {
-    
-    _bolDrawbridge.text = @"0";
-    _bolGate.text = @"0";
-    _bolSallyDoor.text = @"0";
-    _bolLowBar.text = @"0";
-    _bolMoat.text = @"0";
-    _bolRamparts.text = @"0";
-    
-    _bolRockWall.text = @"0";
-    _bolRoughTerrain.text = @"0";
-    _bolSeesaw.text = @"0";
-    if ([_lblAutoPickers.text  isEqualToString: @"Gate"])
-    {
-        _bolGate.text =@"1";
-    }
-    
-    
-    
-   if ([_lblAutoPickers.text isEqualToString:@"Seesaw"])
-    {
-        _bolSeesaw.text =@"1";
-    }
-    
-    
-    
-    if ([_lblAutoPickers.text  isEqualToString:@"Moat"])
-    {
-        _bolMoat.text =@"1";
-    }
-    
-    if ([_lblAutoPickers.text isEqualToString:@"Ramparts"])
-    {
-        _bolRamparts.text =@"1";
-    }
-    
-    if ([_lblAutoPickers.text isEqualToString:@"Drawbridge" ])
-    {
-        _bolDrawbridge.text =@"1";
-    }
-    if ([_lblAutoPickers.text isEqualToString:@"Sally Door"])
-    {
-        _bolSallyDoor.text =@"1";
-        
-    }
-    if ([_lblAutoPickers.text isEqualToString:@"Rock Wall" ])
-    {
-        _bolRockWall.text =@"1";
-    }
-    if ([_lblAutoPickers.text isEqualToString:@"Rough Terrain"])
-    {
-        _bolRoughTerrain.text =@"1";
-    }
-    if ([_lblAutoPickers.text isEqualToString:@"Low Bar"])
-    {
-        _bolLowBar.text =@"1";
-    }
-    
-}
+// See above for details of what the code does.
 
+
+// The Submit button just running two different methods
 
 - (IBAction)didSubmit:(UIButton *)sender {
-    [self varibles];
     [self Save];
     [self NextMatch];
 }
 
+
+// The following method is what saves the data we want on the order we want and as a CSV file.
+
 -(void) Save {
     
     
-        // Saves the data in order of resultLine based on what we want in the code.
+    // Saves the data in order of resultLine based on what we want in the code.
         int number = [_StpMatchnum value];
-         NSString *resultLine = [NSString stringWithFormat:@"%i,%i,%@,%d,%d,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%d,%d,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%f,%d,%@,%d,%d,%d",
+         NSString *resultLine = [NSString stringWithFormat:@"%i,%i,%@,%d,%d,%i,%i,%i,%i,%i,%i,%i,%i,%i,%d,%d,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%d,%f,%f,%d,%@,%d,%d,%d",
                                  [[NSNumber numberWithDouble:_StpMatchnum.value] intValue],
                                 
                                  [_TxtTeamnum.text intValue],
                                 
                                  [_sgmStartLocation titleForSegmentAtIndex:fmax(_sgmStartLocation.selectedSegmentIndex, 0)],
                     _sgmMovedToDefence.selectedSegmentIndex,
-                                 _sgmCrossedDefence.selectedSegmentIndex,
-                                 
-                                 //auton
                                 
                                  
+                                 // Auton Defense Crossed and which one.
                                  
-                                 _bolGate.text,
-                                 _bolDrawbridge.text,
-                                 _bolSeesaw.text,
-                                 _bolMoat.text,
-                                 _bolRamparts.text,
-                                 _bolDrawbridge.text,
-                                 _bolSallyDoor.text,
-                        
-                                 _bolRockWall.text,
-                                 _bolRoughTerrain.text,
-                                 _bolLowBar.text,
+                                 _sgmCrossedDefence.selectedSegmentIndex,
                                  
+                                 [_lblAutoPickers.text isEqualToString: @"Gate"],
+                                 [_lblAutoPickers.text isEqualToString:@"Seesaw"],
+                                 [_lblAutoPickers.text isEqualToString:@"Moat"],
+                                 [_lblAutoPickers.text isEqualToString:@"Ramparts"],
+                                 [_lblAutoPickers.text isEqualToString:@"Drawbridge" ],
+                                 [_lblAutoPickers.text isEqualToString:@"Sally Door"],
+                                 [_lblAutoPickers.text isEqualToString:@"Rock Wall" ],
+                                 [_lblAutoPickers.text isEqualToString:@"Rough Terrain"],
+                                 [_lblAutoPickers.text isEqualToString:@"Low Bar"],
+                                 
+    
+                                 // Attempted SHot and which one was scored.
                                  _sgmShotHigh.selectedSegmentIndex,
                                  _sgmShotLow.selectedSegmentIndex,
                                  _sgmShotAttempted.selectedSegmentIndex,
@@ -430,29 +386,16 @@ else {
                                 [_sgmStrategy titleForSegmentAtIndex:fmax(_sgmStrategy.selectedSegmentIndex,-1)],
                                  _sgmDefence.selectedSegmentIndex,
                                  _sgmDefenceSkill.selectedSegmentIndex + 1,
-                                 _sgmDriverSkill.selectedSegmentIndex +1
-                                 
-                   
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 ];
+                                 _sgmDriverSkill.selectedSegmentIndex +1 ];
     
     
-        // Code for saving, mainly around the CSV part
+    // Code for saving, mainly around the CSV part
         NSString *docPath= [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
         NSString *fileName=@"";
         NSString *deviceName = [[UIDevice currentDevice] name];
+    
+    // These if and else if statements sets the name of the CSV file to what we want which is, match nuber_Name of IPad_Person Scouting
+    // This also insures that the order in which each of the files is organized is the way we want, that way all the files for 1 match are together
         if(number<10){
             fileName =[NSString stringWithFormat:@"00%i_%@_%@.csv",
                        [[NSNumber numberWithDouble:_StpMatchnum.value] intValue], deviceName, _TxtScoutnum.text];
@@ -465,6 +408,8 @@ else {
             fileName =[NSString stringWithFormat:@"%i_%@_%@.csv",
                        [[NSNumber numberWithDouble:_StpMatchnum.value] intValue], deviceName, _TxtScoutnum.text];
         }
+    
+    
         NSString *fullFilePath=[docPath stringByAppendingPathComponent:fileName];
         if (![[NSFileManager defaultManager] fileExistsAtPath:docPath]) {
             [[NSFileManager defaultManager]
@@ -474,18 +419,19 @@ else {
         
         
     }
-
+// The follwoing method is for clearing all saved data and making sure everything is reset to the way we want.
 -(void) NextMatch
 {
     // Next Match and Team Number
-    
     [_StpMatchnum setValue:_StpMatchnum.value +1];
-    [_TxtTeamnum setText:@""];
+    [_TxtTeamnum setText:NULL];
+    
     
     // Auton
     
     [_sgmStartLocation setSelectedSegmentIndex:UISegmentedControlNoSegment];
-    // Add auton Defence here
+    
+    // Resetting of all of the Teleop defense
     _sgmLowBar.selectedSegmentIndex = 0;
     _sgmRockWall.selectedSegmentIndex = 0;
     _sgmMoat.selectedSegmentIndex = 0;
@@ -519,9 +465,12 @@ else {
     _sgmShotHigh.selectedSegmentIndex = 0;
     _sgmShotLow.selectedSegmentIndex = 0;
     _lblAutoPickers.text = @"None";
-    //
     [_sgmDriverSkill setSelectedSegmentIndex:UISegmentedControlNoSegment];
     [_sgmDefenceSkill  setSelectedSegmentIndex:UISegmentedControlNoSegment];
+    
+    
+    // Reruns all the actions now that their varibles are set back to default to make sure any labels are also reset correctly and what needes to be enabled / disabled are also set.
+    
     [self didScoreHigh:_stpHighGoalScore];
     [self didScoreLow:_stpLowGoalScore];
     [self didChangeDefense:_sgmDefence];
@@ -540,9 +489,23 @@ else {
     [self didAutoScoreLow:_sgmShotLow];
     [self didMovetoDefense:_sgmMovedToDefence];
     [self didCrossDefense:_sgmCrossedDefence];
+    [self didChangeTeamnum:_TxtTeamnum];
+    [self didScouterNumber:_TxtScoutnum];
+    // Clears the Pickerview
     [picAutoDefense reloadAllComponents];
     [picAutoDefense selectRow:0 inComponent:0 animated:YES];
+
+    // Makes sure no matter what that the submit button is disabled
+
+    [_Submit setEnabled:NO];
 }
+
+
+
+// These are actions I created after finishing the Submit button and other functions above
+
+
+// Effects Moved to Defense only and allows one to use the picker view
 - (IBAction)didCrossDefense:(UISegmentedControl *)sender {
     if (_sgmCrossedDefence.selectedSegmentIndex == 1) {
         
@@ -574,6 +537,10 @@ else {
     }
 
 }
+
+
+// If they Score high during auto they can't score low
+
 - (IBAction)didAutoScoreHigh:(UISegmentedControl *)sender {
     
 
@@ -590,6 +557,8 @@ else{
 
 }
 
+
+ // If they score low during ato they can't score high
 -(IBAction)didAutoScoreLow:(UISegmentedControl *)sender{
         if (_sgmShotLow.selectedSegmentIndex == 1)
     {
